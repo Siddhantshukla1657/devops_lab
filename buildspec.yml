@@ -3,34 +3,34 @@ version: 0.2
 phases:
   install:
     commands:
-      - echo "Installing Python dependencies..."
-      - python --version
-      - pip install -r requirements.txt
+      - "echo Installing Python dependencies..."
+      - "python --version"
+      - "pip install -r requirements.txt"
 
   pre_build:
     commands:
-      - echo "Running lint..."
-      - flake8 app.py
-      - echo "Lint completed successfully."
-      - echo "Running unit tests..."
-      - pytest test_app.py -v
-      - echo "Unit tests completed successfully."
+      - "echo Running lint..."
+      - "flake8 app.py"
+      - "echo Lint completed successfully."
+      - "echo Running unit tests..."
+      - "pytest test_app.py -v"
+      - "echo Unit tests completed successfully."
 
   build:
     commands:
-      - echo "Packaging Python application..."
-      - mkdir -p package
-      - cp app.py package/
-      - cp test_app.py package/
-      - cp requirements.txt package/
-      - echo "Creating versioned artifact..."
-      - zip -r "devops-lab1-$CODEBUILD_RESOLVED_SOURCE_VERSION.zip" package/
-
+      - "echo Packaging Python application..."
+      - "mkdir -p package"
+      - "cp app.py package/"
+      - "cp test_app.py package/"
+      - "cp requirements.txt package/"
+      - "echo Creating ZIP artifact..."
+      - "zip -r devops-lab1.zip package/"
+  
   post_build:
     commands:
-      - echo "Build completed successfully."
-      - echo "Commit SHA: $CODEBUILD_RESOLVED_SOURCE_VERSION"
+      - "echo Build completed successfully."
+      - "echo Commit SHA is $CODEBUILD_RESOLVED_SOURCE_VERSION"
 
 artifacts:
   files:
-    - "devops-lab1-$CODEBUILD_RESOLVED_SOURCE_VERSION.zip"
+    - "devops-lab1.zip"
